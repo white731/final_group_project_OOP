@@ -1,0 +1,4 @@
+Investment Amount:3000
+How many years:20
+Annual Interest Rate:9
+Monthly input:50
