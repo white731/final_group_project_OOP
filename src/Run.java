@@ -6,7 +6,7 @@ import java.util.Scanner;
 public class Run {
     public static void main(String[] args){
 
-        File fileText = new File("InvestmentInfo.txt");
+        File fileText = new File("InvestmentData.txt");
         ArrayList<String> fileArray = new ArrayList<>();
 
         try {

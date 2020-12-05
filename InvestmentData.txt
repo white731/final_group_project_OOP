@@ -1,0 +1,4 @@
+Investment Amount:
+How many years:
+Annual Interest Rate:
+Monthly input:
