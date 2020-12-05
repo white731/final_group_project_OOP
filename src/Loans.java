@@ -7,7 +7,6 @@ public class Loans extends Money {
     private String currency;
 
     public Loans() {
-
     }
 
     public Loans(double amount, String currency, double loanAmount, int lengthOfLoan, double interestRate, double downPayment, String currency1) {

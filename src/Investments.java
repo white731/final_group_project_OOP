@@ -7,7 +7,6 @@ public class Investments extends Money{
         private String currency;
 
     public Investments() {
-
     }
 
     public Investments(double amount, String currency, double investmentAmount, int lengthOfLoan, double interestRate, double monthlyInput, String currency1) {
