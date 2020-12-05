@@ -1,4 +1,5 @@
 Investment Amount:
-How many years:
+Length of Investment in Years:
 Annual Interest Rate:
 Monthly input:
+Currency (Input “dollar”, “pound”, “euro” or “peso”):

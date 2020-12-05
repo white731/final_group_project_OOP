@@ -1,0 +1,5 @@
+Loan Amount:
+Length of Loan in Years:
+Annual Interest Rate:
+Down payment amount:
+Currency (Type “dollar”, “pound”, “euro” or “peso”):
