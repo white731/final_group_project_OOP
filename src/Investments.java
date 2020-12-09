@@ -1,21 +1,19 @@
 public class Investments extends Money{
 
         private double investmentAmount;
-        private int lengthOfLoan;
+        private int lengthOfInvestment;
         private double interestRate;
         private double monthlyInput;
-        private String currency;
 
     public Investments() {
     }
 
-    public Investments(double amount, String currency, double investmentAmount, int lengthOfLoan, double interestRate, double monthlyInput, String currency1) {
+    public Investments(double amount, String currency, double investmentAmount, int lengthOfInvestment, double interestRate, double monthlyInput, String currency1) {
         super(amount, currency);
         this.investmentAmount = investmentAmount;
-        this.lengthOfLoan = lengthOfLoan;
+        this.lengthOfInvestment = lengthOfInvestment;
         this.interestRate = interestRate;
         this.monthlyInput = monthlyInput;
-        this.currency = currency1;
     }
 
     public double getInvestmentAmount() {
@@ -26,12 +24,12 @@ public class Investments extends Money{
         this.investmentAmount = investmentAmount;
     }
 
-    public int getLengthOfLoan() {
-        return lengthOfLoan;
+    public int getLengthOfInvestment() {
+        return lengthOfInvestment;
     }
 
-    public void setLengthOfLoan(int lengthOfLoan) {
-        this.lengthOfLoan = lengthOfLoan;
+    public void setLengthOfInvestment(int lengthOfInvestment) {
+        this.lengthOfInvestment = lengthOfInvestment;
     }
 
     public double getInterestRate() {
@@ -50,14 +48,9 @@ public class Investments extends Money{
         this.monthlyInput = monthlyInput;
     }
 
-    @Override
-    public String getCurrency() {
-        return currency;
-    }
-
-    @Override
-    public void setCurrency(String currency) {
-        this.currency = currency;
+    public double futureValue(){
+        double fv = investmentAmount * Math.pow((1+(interestRate/12)),(lengthOfInvestment*12));
+        return fv;
     }
 
     @Override

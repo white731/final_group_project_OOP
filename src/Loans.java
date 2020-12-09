@@ -4,7 +4,6 @@ public class Loans extends Money {
     private int lengthOfLoan;
     private double interestRate;
     private double downPayment;
-    private String currency;
 
     public Loans() {
     }
@@ -15,7 +14,6 @@ public class Loans extends Money {
         this.lengthOfLoan = lengthOfLoan;
         this.interestRate = interestRate;
         this.downPayment = downPayment;
-        this.currency = currency1;
     }
 
     public double getLoanAmount() {
@@ -48,16 +46,6 @@ public class Loans extends Money {
 
     public void setDownPayment(double downPayment) {
         this.downPayment = downPayment;
-    }
-
-    @Override
-    public String getCurrency() {
-        return currency;
-    }
-
-    @Override
-    public void setCurrency(String currency) {
-        this.currency = currency;
     }
 
     @Override
