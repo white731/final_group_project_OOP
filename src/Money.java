@@ -86,7 +86,7 @@ public class Money {
                 break;
         }
 
-        String money = symbol + String.valueOf(amount);
+        String money = symbol + amount;
         return money;
     }
 
