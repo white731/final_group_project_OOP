@@ -1,5 +1,5 @@
-Investment Amount:3500
-Length of Investment in Years:67
-Annual Interest Rate:6%
-Monthly input:100
-Currency (Input “dollar”, “pound”, “euro” or “peso”):dollar
+Investment Amount:
+Length of Investment in Year(s):
+Annual Interest Rate:
+Monthly input:
+Currency (Input “dollar”, “pound”, “euro” or “peso”):

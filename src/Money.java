@@ -86,7 +86,9 @@ public class Money {
                 break;
         }
 
-        String money = symbol + amount;
+        double formattedAmount = Math.round(amount * 100.0)/100.0;
+
+        String money = symbol + formattedAmount;
         return money;
     }
 
