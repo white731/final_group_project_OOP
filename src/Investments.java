@@ -124,14 +124,16 @@ public class Investments extends Money{
      * @return fv or the future value of an object
      */
     public double futureValue(){
-        double fv = investmentAmount * Math.pow((1+(interestRate/12)),(lengthOfInvestment*12));
+        double interestRate1 = interestRate/12;
+        int periods = lengthOfInvestment*12;
+        double fv = investmentAmount + lengthOfInvestment;
         return fv;
     }
 
     /**
      * to_currency
      * This is the method that formats the futureValue amount into whatever currency the user has chosen
-     * @return a string thats formatted. ie. $200.00
+     * @return a string that's formatted. ie. $200.00
      */
     @Override
     public String to_currency() {
@@ -208,7 +210,7 @@ public class Investments extends Money{
         String investmentCurrencyString = investmentArray.get(4).split(":")[0];
         String investmentCurrency = investmentArray.get(4).split(":")[1].trim();
 
- /*
+        /*
         create an Investments object called fv (future value)
          */
         Investments fv = new Investments();

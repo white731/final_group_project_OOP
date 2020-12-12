@@ -31,6 +31,32 @@ public class ResetFiles {
         } catch ( IOException e) {
             System.out.println("Theres Been an Error");
         }
+//---------------------------------Loan------------------------------------//
+        try {
+            File loanFile = new File("LoanData.txt");
+            if (loanFile.createNewFile()) {
+                System.out.println("File created: " + loanFile.getName());
+            } else {
+                System.out.println("File already exists.");
+            }
+        } catch (IOException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
+
+        try {
+            FileWriter loanStartData = new FileWriter("LoanData.txt");
+            loanStartData.write(
+                    "Loan Amount:\n" +
+                            "Length of Loan in Years:\n" +
+                            "Annual Interest Rate:\n" +
+                            "Down payment amount:\n" +
+                            "Currency (Type “dollar”, “pound”, “euro” or “peso”):");
+            loanStartData.close();
+
+        } catch ( IOException e) {
+            System.out.println("Theres Been an Error");
+        }
 
     }
 }

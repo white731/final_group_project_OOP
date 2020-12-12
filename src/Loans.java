@@ -1,17 +1,35 @@
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Loans extends Money {
-
+    /*
+    instance variables loanAmount, lengthOfLoan, interestRate and downPayment
+     */
     private double loanAmount;
     private int lengthOfLoan;
     private double interestRate;
     private double downPayment;
 
+    /**
+     * Loans Method
+     * Constructor #1
+     * No parameters
+     */
     public Loans() {
     }
+
+    /**
+     * Loans Method
+     * Constructor #2 - sets the values of the instance variable to loanAmount, lengthOfLoan, interestRate and downPayment
+     * @param loanAmount - currency value unformatted
+     * @param lengthOfLoan - how long the loan is for
+     * @param interestRate - the interest the user will be charged
+     * @param downPayment - currency value unformatted
+     */
 
     public Loans(double amount, String currency, double loanAmount, int lengthOfLoan, double interestRate, double downPayment, String currency1) {
         super(amount, currency);
@@ -21,43 +39,94 @@ public class Loans extends Money {
         this.downPayment = downPayment;
     }
 
+    /**
+     * getLoanAmount
+     * Method to get the amount from a Money object
+     * @return loanAmount
+     */
     public double getLoanAmount() {
         return loanAmount;
     }
 
+    /**
+     * setLoanAmount
+     * Sets the amount of an object to instance variable value
+     * @param loanAmount this is a double, it represents an amount of unformatted money
+     */
     public void setLoanAmount(double loanAmount) {
         this.loanAmount = loanAmount;
     }
 
+    /**
+     * getLengthOfLoan
+     * Method to get the amount from a Money object
+     * @return lengthOfLoan
+     */
     public int getLengthOfLoan() {
         return lengthOfLoan;
     }
 
+    /**
+     * setLengthOfLoan
+     * Sets the amount of an object to instance variable value
+     * @param lengthOfLoan this is a double, it represents how long it will take to pay off the loan
+     */
     public void setLengthOfLoan(int lengthOfLoan) {
         this.lengthOfLoan = lengthOfLoan;
     }
 
+    /**
+     * getInterestRate
+     * Method to get the loan interest from a Money object
+     * @return interestRate
+     */
     public double getInterestRate() {
         return interestRate;
     }
 
+    /**
+     * setInterestRate
+     * Sets the interest of an object to instance variable value
+     * @param interestRate this is a double, it represents the interest rate of the loan
+     */
     public void setInterestRate(double interestRate) {
         this.interestRate = interestRate;
     }
 
+    /**
+     * getDownPayment
+     * Method to get the down payment from a Money object
+     * @return downPayment
+     */
     public double getDownPayment() {
         return downPayment;
     }
 
+    /**
+     * setDownPayment
+     * Sets the amount of an object to instance variable value
+     * @param downPayment this is a double, it represents the down payment of the loan
+     */
     public void setDownPayment(double downPayment) {
         this.downPayment = downPayment;
+    }
+
+    /** monthlypayment Method
+     * monthlypayment method will calculate how much the user
+     *  needs to pay monthly to finish paying the loan in a certain period.
+     * @return  montlhypayment
+     */
+
+    public double monthlyPayment (){
+        double payment = downPayment + loanAmount;
+        return payment;
     }
 
     @Override
     public String to_currency() {
         String x = super.to_currency();
-        String y = "Future Value Amount";
-        return x + y;
+        String y = "Monthly Payment is: ";
+        return y + x;
     }
 
     public static void main(String[] arg) {
@@ -116,10 +185,66 @@ public class Loans extends Money {
         } else {
             System.out.printf("Sorry You'll need to adjust your answer so there is a percentage on the number. like this %s",loanInterestNumString);
         }
-        String loanInputString = loanArray.get(3).split(":")[0];
-        double loanInputNum = Double.parseDouble(loanArray.get(3).split(":")[1]);
+        String loanDownPaymentString = loanArray.get(3).split(":")[0];
+        double loanDownPaymentNum = Double.parseDouble(loanArray.get(3).split(":")[1]);
         String loanCurrencyString = loanArray.get(4).split(":")[0];
         String loanCurrency = loanArray.get(4).split(":")[1].trim();
+
+          /*
+        create an Investments object called fv (future value)
+         */
+        Loans mp = new Loans();
+
+
+        /*
+        Assign the the newly created investment object all the inputs that were gathered from the scanner
+         */
+
+        mp.setCurrency(loanCurrency);
+        mp.setInterestRate(loanInterestNum);
+        mp.setLoanAmount(loanAmountNum);
+        mp.setLengthOfLoan(loanYearsNum);
+        mp.setDownPayment(loanDownPaymentNum);
+
+        /*
+        create a variable that stores the fv.futureValue
+         */
+
+        double monthlyPayment = mp.monthlyPayment();
+
+        /*
+        set Amount to futureValue
+         */
+        mp.setAmount(monthlyPayment);
+
+        /*
+        Write the answers to the very same file that was read. Write back in all the original inputs along with the
+        the answer (future value) using the to_currency method
+         */
+
+
+        System.out.println("Monthly Payment is: " + mp.monthlyPayment());
+        System.out.println(mp.to_currency());
+
+
+
+         /*
+        Write the answers to the very same file that was read. Write back in all the original inputs along with the
+        the answer (future value) using the to_currency method
+         */
+
+        try {
+            FileWriter investmentWriter = new FileWriter("LoanData.txt",true);
+            investmentWriter.append("\n");
+            investmentWriter.append(mp.to_currency());
+            investmentWriter.close();
+
+
+
+        } catch (IOException e) {
+            System.out.println("An Error occurred");
+
+        }
 
 
     }
