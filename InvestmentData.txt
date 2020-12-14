@@ -1,14 +1,5 @@
-Investment Amount:100
-Length of Investment in Year(s):1
-Annual Interest Rate:10%
-Monthly input:10
-Currency (Input “dollar”, “pound”, “euro” or “peso”):dollar
-Future Value Amount is: $333168.0
-Future Value Amount is: $9.223372036854776E16
-Future Value Amount is: $31617.73
-Future Value Amount is: $261.3
-Future Value Amount is: $1261.3
-Future Value Amount is: $471.0
-Future Value Amount is: $261.3
-Future Value Amount is: $110.47
-Future Value Amount is: $237.17
+Investment Amount:
+Length of Investment in Year(s):
+Annual Interest Rate:
+Monthly input:
+Currency (Input “dollar”, “pound”, “euro” or “peso”):

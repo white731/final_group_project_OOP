@@ -50,7 +50,6 @@ public class ResetFiles {
                     "Loan Amount:\n" +
                             "Length of Loan in Years:\n" +
                             "Annual Interest Rate:\n" +
-                            "Down payment amount:\n" +
                             "Currency (Type “dollar”, “pound”, “euro” or “peso”):");
             loanStartData.close();
 

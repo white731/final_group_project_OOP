@@ -1,5 +1,4 @@
-Loan Amount:1000
-Length of Loan in Years:1
-Annual Interest Rate:10%
-Down payment amount:Currency (Type “dollar”, “pound”, “euro” or “peso”):dollar
-Monthly Payment is: 1000.0
+Loan Amount:
+Length of Loan in Years:
+Annual Interest Rate:
+Currency (Type “dollar”, “pound”, “euro” or “peso”):

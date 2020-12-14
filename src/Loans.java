@@ -98,8 +98,10 @@ public class Loans extends Money {
      */
 
     public double monthlyPayment (){
-        double payment = loanAmount;
-        return payment;
+        double monthlyRate = interestRate/1200;
+        double periods= lengthOfLoan*12;
+        double payment = (loanAmount * monthlyRate)/(1-Math.pow(1+ monthlyRate, -periods));
+    return payment;
     }
 
     @Override
