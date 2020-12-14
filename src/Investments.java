@@ -124,10 +124,12 @@ public class Investments extends Money{
      * @return fv or the future value of an object
      */
     public double futureValue(){
-        double interestRate1 = interestRate/12;
+        double interestRate1 = interestRate/1200;
         int periods = lengthOfInvestment*12;
-        double fv = investmentAmount + lengthOfInvestment;
-        return fv;
+        double pfv = investmentAmount * (Math.pow(interestRate1+1,periods));
+        double fv = monthlyInput * ((Math.pow((1+interestRate1),periods) - 1)/interestRate1)*(1+interestRate1);
+        double total = pfv + fv;
+        return total;
     }
 
     /**

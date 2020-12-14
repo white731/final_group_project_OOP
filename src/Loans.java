@@ -7,12 +7,11 @@ import java.util.Scanner;
 
 public class Loans extends Money {
     /*
-    instance variables loanAmount, lengthOfLoan, interestRate and downPayment
+    instance variables loanAmount, lengthOfLoan, interestRate
      */
     private double loanAmount;
     private int lengthOfLoan;
     private double interestRate;
-    private double downPayment;
 
     /**
      * Loans Method
@@ -24,19 +23,17 @@ public class Loans extends Money {
 
     /**
      * Loans Method
-     * Constructor #2 - sets the values of the instance variable to loanAmount, lengthOfLoan, interestRate and downPayment
+     * Constructor #2 - sets the values of the instance variable to loanAmount, lengthOfLoan, interestRate
      * @param loanAmount - currency value unformatted
      * @param lengthOfLoan - how long the loan is for
      * @param interestRate - the interest the user will be charged
-     * @param downPayment - currency value unformatted
      */
 
-    public Loans(double amount, String currency, double loanAmount, int lengthOfLoan, double interestRate, double downPayment, String currency1) {
+    public Loans(double amount, String currency, double loanAmount, int lengthOfLoan, double interestRate, String currency1) {
         super(amount, currency);
         this.loanAmount = loanAmount;
         this.lengthOfLoan = lengthOfLoan;
         this.interestRate = interestRate;
-        this.downPayment = downPayment;
     }
 
     /**
@@ -93,32 +90,15 @@ public class Loans extends Money {
         this.interestRate = interestRate;
     }
 
-    /**
-     * getDownPayment
-     * Method to get the down payment from a Money object
-     * @return downPayment
-     */
-    public double getDownPayment() {
-        return downPayment;
-    }
 
-    /**
-     * setDownPayment
-     * Sets the amount of an object to instance variable value
-     * @param downPayment this is a double, it represents the down payment of the loan
-     */
-    public void setDownPayment(double downPayment) {
-        this.downPayment = downPayment;
-    }
-
-    /** monthlypayment Method
-     * monthlypayment method will calculate how much the user
+    /** monthlyPayment Method
+     * monthlyPayment method will calculate how much the user
      *  needs to pay monthly to finish paying the loan in a certain period.
-     * @return  montlhypayment
+     * @return  montlhyPayment
      */
 
     public double monthlyPayment (){
-        double payment = downPayment + loanAmount;
+        double payment = loanAmount;
         return payment;
     }
 
@@ -185,10 +165,8 @@ public class Loans extends Money {
         } else {
             System.out.printf("Sorry You'll need to adjust your answer so there is a percentage on the number. like this %s",loanInterestNumString);
         }
-        String loanDownPaymentString = loanArray.get(3).split(":")[0];
-        double loanDownPaymentNum = Double.parseDouble(loanArray.get(3).split(":")[1]);
-        String loanCurrencyString = loanArray.get(4).split(":")[0];
-        String loanCurrency = loanArray.get(4).split(":")[1].trim();
+        String loanCurrencyString = loanArray.get(3).split(":")[0];
+        String loanCurrency = loanArray.get(3).split(":")[1].trim();
 
           /*
         create an Investments object called fv (future value)
@@ -204,7 +182,6 @@ public class Loans extends Money {
         mp.setInterestRate(loanInterestNum);
         mp.setLoanAmount(loanAmountNum);
         mp.setLengthOfLoan(loanYearsNum);
-        mp.setDownPayment(loanDownPaymentNum);
 
         /*
         create a variable that stores the fv.futureValue
