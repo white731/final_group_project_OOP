@@ -82,7 +82,7 @@ public class Money {
                 symbol = "₱";
                 break;
             default:
-                symbol = "";
+                symbol = "Please enter the type “dollar”, “pound”, “euro” or “peso-------";
                 break;
         }
 

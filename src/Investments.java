@@ -11,10 +11,10 @@ public class Investments extends Money{
 
 // Create 4 instance variables that will be necessary to calculate the future value for the user.
 
-        private double investmentAmount;
-        private int lengthOfInvestment;
-        private double interestRate;
-        private double monthlyInput;
+    private double investmentAmount;
+    private int lengthOfInvestment;
+    private double interestRate;
+    private double monthlyInput;
 
     /**
      * Investments
@@ -139,8 +139,8 @@ public class Investments extends Money{
      */
     @Override
     public String to_currency() {
-       String x = super.to_currency();
-       String y = "Future Value Amount is: ";
+        String x = super.to_currency();
+        String y = "Future Value Amount is: ";
         return y + x;
     }
 
@@ -194,61 +194,61 @@ public class Investments extends Money{
         /*
         include some validations on some inputs (like interest rate ) so that an input without a "%" won't work
          */
+        try {
 
-        String investmentAmountString = investmentArray.get(0).split(":")[0];
-        double investmentAmountNum = Double.parseDouble(investmentArray.get(0).split(":")[1]);
-        String investmentYearsString = investmentArray.get(1).split(":")[0];
-        int investmentYearsNum = Integer.parseInt(investmentArray.get(1).split(":")[1]);
-        String investmentInterestString = investmentArray.get(2).split(":")[0];
-        String investmentInterestNumString = investmentArray.get(2).split(":")[1];
-        double investmentInterestNum = 0.00;
-        if (investmentInterestNumString.contains("%")) {
-            investmentInterestNum = Double.parseDouble(investmentArray.get(2).split(":")[1].split("%")[0]);
-        } else {
-            System.out.printf("Sorry You'll need to adjust your answer so there is a percentage on the number. like this %s",investmentInterestNumString);
-        }
-        String investmentInputString = investmentArray.get(3).split(":")[0];
-        double investmentInputNum = Double.parseDouble(investmentArray.get(3).split(":")[1]);
-        String investmentCurrencyString = investmentArray.get(4).split(":")[0];
-        String investmentCurrency = investmentArray.get(4).split(":")[1].trim();
+
+            String investmentAmountString = investmentArray.get(0).split(":")[0];
+            double investmentAmountNum = Double.parseDouble(investmentArray.get(0).split(":")[1].trim());
+            String investmentYearsString = investmentArray.get(1).split(":")[0];
+            int investmentYearsNum = Integer.parseInt(investmentArray.get(1).split(":")[1].trim());
+            String investmentInterestString = investmentArray.get(2).split(":")[0];
+            String investmentInterestNumString = investmentArray.get(2).split(":")[1].trim();
+            double investmentInterestNum = 0.00;
+            if (investmentInterestNumString.contains("%")) {
+                investmentInterestNum = Double.parseDouble(investmentArray.get(2).split(":")[1].split("%")[0].trim());
+            } else {
+                System.out.printf("Sorry You'll need to adjust your answer so there is a percentage on the number. like this %s", investmentInterestNumString);
+            }
+            String investmentInputString = investmentArray.get(3).split(":")[0];
+            double investmentInputNum = Double.parseDouble(investmentArray.get(3).split(":")[1].trim());
+            String investmentCurrencyString = investmentArray.get(4).split(":")[0];
+            String investmentCurrency = investmentArray.get(4).split(":")[1].trim();
+
 
         /*
         create an Investments object called fv (future value)
          */
-        Investments fv = new Investments();
 
-        double futureValue1 = 100.00;
+            Investments fv = new Investments();
 
 
         /*
         Assign the the newly created investment object all the inputs that were gathered from the scanner
          */
 
-        fv.setCurrency(investmentCurrency);
-        fv.setInterestRate(investmentInterestNum);
-        fv.setInvestmentAmount(investmentAmountNum);
-        fv.setLengthOfInvestment(investmentYearsNum);
-        fv.setMonthlyInput(investmentInputNum);
+            fv.setCurrency(investmentCurrency);
+            fv.setInterestRate(investmentInterestNum);
+            fv.setInvestmentAmount(investmentAmountNum);
+            fv.setLengthOfInvestment(investmentYearsNum);
+            fv.setMonthlyInput(investmentInputNum);
 
         /*
         create a variable that stores the fv.futureValue
          */
 
-        double futureValue = fv.futureValue();
+            double futureValue = fv.futureValue();
 
         /*
         set Amount to futureValue
          */
-        fv.setAmount(futureValue);
+            fv.setAmount(futureValue);
 
         /*
         Write the answers to the very same file that was read. Write back in all the original inputs along with the
         the answer (future value) using the to_currency method
          */
 
-
-        System.out.println("futureValue is:" + fv.futureValue());
-        System.out.println(fv.to_currency());
+            System.out.println(fv.to_currency());
 
 
 
@@ -257,23 +257,32 @@ public class Investments extends Money{
         the answer (future value) using the to_currency method
          */
 
-        try {
-            FileWriter investmentWriter = new FileWriter("InvestmentData.txt",true);
-            investmentWriter.append("\n");
-            investmentWriter.append(fv.to_currency());
-            investmentWriter.close();
+            try {
+                FileWriter investmentWriter = new FileWriter("InvestmentData.txt", true);
+                investmentWriter.append("\n");
+                investmentWriter.append(fv.to_currency());
+                investmentWriter.close();
 
 
+            } catch (IOException e) {
+                System.out.println("An Error occurred");
 
-        } catch (IOException e) {
-            System.out.println("An Error occurred");
+            }
 
         }
 
 
-
-
-
+        catch (ArrayIndexOutOfBoundsException e){
+            System.out.println("Please enter values into the InvestmentData.txt file");
+        }
+        catch(NumberFormatException e) {
+            System.out.println("When entering dollar amounts, only enter numbers with no dollar signs" +
+                    "or any other characters. The interest rate is the only number field that requires a % sign.");
+        }
+        catch(IndexOutOfBoundsException e) {
+            System.out.println("It looks like you've changed part of the of original text file");
+            ResetFiles.main(null);
+        }
 
     }
 }

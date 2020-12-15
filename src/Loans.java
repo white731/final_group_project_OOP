@@ -101,7 +101,7 @@ public class Loans extends Money {
         double monthlyRate = interestRate/1200;
         double periods= lengthOfLoan*12;
         double payment = (loanAmount * monthlyRate)/(1-Math.pow(1+ monthlyRate, -periods));
-    return payment;
+        return payment;
     }
 
     @Override
@@ -138,14 +138,14 @@ public class Loans extends Money {
             Scanner readLoanFile = new Scanner(loanFile);
 
             // loop over all the lines of the loan file to to get all the strings
-            while(readLoanFile.hasNextLine()){
+            while (readLoanFile.hasNextLine()) {
                 loanArray.add(readLoanFile.nextLine());
             }
             readLoanFile.close();
 
             // if file does not exist, goes to catch and prints an error message
 
-        } catch (FileNotFoundException ex){
+        } catch (FileNotFoundException ex) {
             System.out.println("This File does not Exist. Make sure that it is available on the server");
             System.out.println(ex);
         }
@@ -155,46 +155,48 @@ public class Loans extends Money {
         use the split function on the character ":" to split the string into an array of 2. the string at array [0]
         will be the label and the item at location [1] will be the response from the user.
          */
-        String loanAmountString = loanArray.get(0).split(":")[0];
-        double loanAmountNum = Double.parseDouble(loanArray.get(0).split(":")[1]);
-        String loanYearsString = loanArray.get(1).split(":")[0];
-        int loanYearsNum = Integer.parseInt(loanArray.get(1).split(":")[1]);
-        String loanInterestString = loanArray.get(2).split(":")[0];
-        String loanInterestNumString = loanArray.get(2).split(":")[1];
-        double loanInterestNum = 0.00;
-        if (loanInterestNumString.contains("%")) {
-            loanInterestNum = Double.parseDouble(loanArray.get(2).split(":")[1].split("%")[0]);
-        } else {
-            System.out.printf("Sorry You'll need to adjust your answer so there is a percentage on the number. like this %s",loanInterestNumString);
-        }
-        String loanCurrencyString = loanArray.get(3).split(":")[0];
-        String loanCurrency = loanArray.get(3).split(":")[1].trim();
+        try{
+
+            String loanAmountString = loanArray.get(0).split(":")[0];
+            double loanAmountNum = Double.parseDouble(loanArray.get(0).split(":")[1].trim());
+            String loanYearsString = loanArray.get(1).split(":")[0];
+            int loanYearsNum = Integer.parseInt(loanArray.get(1).split(":")[1].trim());
+            String loanInterestString = loanArray.get(2).split(":")[0];
+            String loanInterestNumString = loanArray.get(2).split(":")[1].trim();
+            double loanInterestNum = 0.00;
+            if (loanInterestNumString.contains("%")) {
+                loanInterestNum = Double.parseDouble(loanArray.get(2).split(":")[1].split("%")[0].trim());
+            } else {
+                System.out.printf("Sorry You'll need to adjust your answer so there is a percentage on the number. like this %s", loanInterestNumString);
+            }
+            String loanCurrencyString = loanArray.get(3).split(":")[0];
+            String loanCurrency = loanArray.get(3).split(":")[1].trim();
 
           /*
         create an Investments object called fv (future value)
          */
-        Loans mp = new Loans();
+            Loans mp = new Loans();
 
 
         /*
         Assign the the newly created investment object all the inputs that were gathered from the scanner
          */
 
-        mp.setCurrency(loanCurrency);
-        mp.setInterestRate(loanInterestNum);
-        mp.setLoanAmount(loanAmountNum);
-        mp.setLengthOfLoan(loanYearsNum);
+            mp.setCurrency(loanCurrency);
+            mp.setInterestRate(loanInterestNum);
+            mp.setLoanAmount(loanAmountNum);
+            mp.setLengthOfLoan(loanYearsNum);
 
         /*
         create a variable that stores the fv.futureValue
          */
 
-        double monthlyPayment = mp.monthlyPayment();
+            double monthlyPayment = mp.monthlyPayment();
 
         /*
         set Amount to futureValue
          */
-        mp.setAmount(monthlyPayment);
+            mp.setAmount(monthlyPayment);
 
         /*
         Write the answers to the very same file that was read. Write back in all the original inputs along with the
@@ -202,8 +204,7 @@ public class Loans extends Money {
          */
 
 
-        System.out.println("Monthly Payment is: " + mp.monthlyPayment());
-        System.out.println(mp.to_currency());
+            System.out.println(mp.to_currency());
 
 
 
@@ -212,19 +213,30 @@ public class Loans extends Money {
         the answer (future value) using the to_currency method
          */
 
-        try {
-            FileWriter investmentWriter = new FileWriter("LoanData.txt",true);
-            investmentWriter.append("\n");
-            investmentWriter.append(mp.to_currency());
-            investmentWriter.close();
+            try {
+                FileWriter investmentWriter = new FileWriter("LoanData.txt", true);
+                investmentWriter.append("\n");
+                investmentWriter.append(mp.to_currency());
+                investmentWriter.close();
 
 
+            } catch (IOException e) {
+                System.out.println("An Error occurred");
 
-        } catch (IOException e) {
-            System.out.println("An Error occurred");
+            }
 
         }
 
-
+        catch (ArrayIndexOutOfBoundsException e){
+            System.out.println("Please enter values into the LoanData.txt file");
+        }
+        catch(NumberFormatException e) {
+            System.out.println("When entering dollar amounts, only enter numbers with no dollar signs" +
+                    "or any other characters. The interest rate is the only number field that requires a % sign.");
+        }
+        catch(IndexOutOfBoundsException e) {
+            System.out.println("It looks like you've changed part of the of original text file");
+            ResetFiles.main(null);
+        }
     }
 }
